@@ -132,3 +132,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CART_ID = 'cart'
+
+STRIPE_TEST_PUBLISHABLE_KEY='pk_test_51Kmh2iIo1A0uNfLObzHBiByzXf3dWFFPYcJs1zcbxyD9qaOZfIgsKJtPropD7xC5l7laZlZQqjyXW3nk2x6k7UxQ00l3vxzkQ1'
+STRIPE_TEST_SECRET_KEY='sk_test_51Kmh2iIo1A0uNfLO0VyCZapPH0GqDtJtqcSUQxMxJ2SX0w3z6lwYCmyQkV4WvfNRhpCmLM6OoUjnsOdBi09avDiN0092k56HfP'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

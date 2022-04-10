@@ -3,7 +3,11 @@ from .models import OrderItem, Order, Product
 from .forms import OrderCreateForm
 from cart.views import get_cart, cart_clear
 from decimal import Decimal
+from django.conf import settings
+import stripe
+from .tasks import order_created
 
+stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
 def order_create(request):
     cart = get_cart(request)
@@ -30,7 +34,12 @@ def order_create(request):
                 cart_item =cart[str(product.id)]
                 OrderItem.objects.create(order=order, product=product, price=cart_item['price'], quantity=cart_item['quantity'])
                 
+            customer = stripe.Customer.create(email = cf['email'], source = request.POST['stripeToken'])
+            charge = stripe.Charge.create (customer = customer, amount = int(order.get_total_cost() * 100), currency='usd', description = order)
+
             cart_clear(request)
+
+            order_created.delay(order.id)
             
             return render(request, 'order_created.html', {'order': order})
         
