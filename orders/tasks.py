@@ -12,3 +12,13 @@ def order_created(order_id):
     mail_sent = send_mail(subject, message, 'eshop@finesauces.store', [order.email])
     
     return mail_sent
+
+@task
+def status_change_notification(order_id):
+    order = Order.objects.get(id=order_id)
+    subject = f'Order nr. {order.id}'
+    message = f'Dear {order.first_name},\n\n'\
+              f'Status of your order {order.id} was changed to {order.status}'
+    mail_sent = send_mail(subject, message, 'eshop@finesauces.store', [order.email])
+
+    return mail_sent
