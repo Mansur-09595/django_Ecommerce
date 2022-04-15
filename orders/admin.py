@@ -5,8 +5,6 @@ import xlsxwriter
 import datetime
 from django.http import HttpResponse
 
-
-
 def export_to_xlsx(modeladmin, request, queryset):
     opts = modeladmin.model._meta
     dateTimeObj = datetime.datetime.now()
@@ -105,7 +103,7 @@ class OrderItemInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name', 'email', 'address', 'postal_code', 'city', 'transport', 'created', 'status']
+    list_display = ['id', 'first_name', 'last_name', 'email', 'address', 'postal_code', 'city', 'transport', 'created', 'status',]
     list_filter = ['created', 'updated']
     inlines = [OrderItemInline,]
 

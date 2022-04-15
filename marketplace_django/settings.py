@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
@@ -137,3 +140,6 @@ STRIPE_TEST_PUBLISHABLE_KEY='pk_test_51Kmh2iIo1A0uNfLObzHBiByzXf3dWFFPYcJs1zcbxy
 STRIPE_TEST_SECRET_KEY='sk_test_51Kmh2iIo1A0uNfLO0VyCZapPH0GqDtJtqcSUQxMxJ2SX0w3z6lwYCmyQkV4WvfNRhpCmLM6OoUjnsOdBi09avDiN0092k56HfP'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'shops:product_list'

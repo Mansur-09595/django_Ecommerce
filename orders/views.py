@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404
-from .models import OrderItem, Order, Product
-from .forms import OrderCreateForm
+import stripe
 from cart.views import get_cart, cart_clear
+from django.shortcuts import render, get_object_or_404
 from decimal import Decimal
 from django.conf import settings
-import stripe
+
+from .models import OrderItem, Order, Product
+from .forms import OrderCreateForm
 from .tasks import order_created
 
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
